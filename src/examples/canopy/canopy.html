@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>solar canopy</title>
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <style>
+          canvas {width: 100%; height: 100%;}
+          input {width: 100%;}
+
+          body {       
+            background-color:blue;
+            color: black;
+            font-family: monospace;
+            font-style: none;
+            font-size: 9pt;
+          }
+          
+          #container {
+            position: absolute;
+            /* background-color:yellow; */
+            z-index: 1;
+            width: 300px;
+            height: relative;
+            /* border: 2px dotted rgb(255, 255, 255, 0.3); */
+            padding-left: 10px;
+            padding-right: 25px;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            float: left;
+          }
+
+          /* .overlay { 
+            position: relative;
+            background-color:tomato;
+            z-index: 1;
+            top: 0pt; 
+            left: 0pt;
+            bottom: 5pt;
+            width: 100%;
+            padding-top: 5px;
+            padding-left: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+          } */
+
+          #overlay1 { 
+            position: relative;
+            background-color:rgb(255, 255, 255, 0.65);
+            /* border: 2px dotted rgb(255, 255, 255, 0.3); */
+            z-index: 1;
+            top: 0pt; 
+            left: 0pt;
+            bottom: 5pt;
+            width: 100%;
+            padding-top: 5px;
+            padding-left: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+          }
+
+          #overlay2 { 
+            position: relative;
+            background-color:rgb(255, 255, 255, 0.65);
+            z-index: 1;
+            top: 5pt; 
+            left: 0pt;
+            bottom: 5pt;
+            width: 100%;
+            padding-top: 5px;
+            padding-left: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+          }
+
+          #overlay3 { 
+            position: relative;
+            background-color:rgb(255, 255, 255, 0.65);
+            z-index: 1;
+            top: 10pt; 
+            left: 0pt;
+            bottom: 5pt;
+            width: 100%;
+            padding-top: 5px;
+            padding-left: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+          }
+
+          #overlay4 { 
+            position: relative;
+            background-color:rgb(255, 255, 255, 0.65);
+            z-index: 1;
+            top: 15pt; 
+            left: 0pt;
+            bottom: 5pt;
+            width: 100%;
+            padding-top: 5px;
+            padding-left: 5px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+          }
+
+          #overlay5 { 
+            position: relative;
+            /* background-color:tomato; */
+            z-index: 1;
+            top: 15pt; 
+            left: 0pt;
+            right: 0pt;
+            width: 100%;
+            padding-top: 10px;
+            padding-left: 0px;
+            padding-right: 0px;;
+            padding-bottom: 5px;
+          }
+
+          #overlay6 { 
+            position: relative;
+            z-index: 1;
+            top: 25pt; 
+            left: 0pt;
+            right: 0pt;
+            width: 100%;
+            padding-top: 10px;
+            padding-left: 0px;
+            padding-right: 0px;;
+            padding-bottom: 5px;
+          }
+
+          /*#overlay div {padding: 5px;} /* BORRAR? */ 
+
+          /* #rhinoButton {position: relative;}
+          #htmlButton {position: relative;} */ 
+          
+          #loader {
+            border: 5px solid mediumvioletred;
+            border-top: 5px solid white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 2;
+          } 
+
+          /* ///////////////////////// TITLE & INTRO ///////////////////////// */   
+
+          .header1 {
+            width: 100%;
+            color:mediumvioletred;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-style: bold;
+            font-size: 18px;
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 0px;
+            padding-right: 0px;
+            letter-spacing: 5px;
+          }
+
+          .header2 {
+            width: 95%;
+            color: black;
+            font-family: monospace;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 9pt;
+            text-align: center;
+            padding-top: 2.5px;
+            padding-bottom: 2.5px;
+            padding-left: 10px;
+            padding-right: 0px;
+            letter-spacing: 1px;
+          }
+
+          .header3 {
+            width: 100%;
+            color: rgb(255, 255, 255);
+            font-family: monospace;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 7pt;
+            text-align: left;
+            padding-left: 0px;
+            padding-right: 0px;
+            letter-spacing: 1px;
+          }
+
+          /* ///////////////////////// BUTTONS ///////////////////////// */    
+
+          .button {
+            background: mediumvioletred;
+            border: none;
+            outline: none;
+            padding: 1pt;
+            width: 70px;
+            font-size: 12pt;
+            font-family: monospace;
+            color: white;
+            text-transform: lowercase;
+            cursor: pointer;
+          }
+
+          .button:hover {
+            background: black;
+          }
+
+          /* ///////////////////////// SLIDERS ///////////////////////// */
+          .slider {
+            appearance: none;
+            height: 10px; 
+            background: mediumvioletred;
+            outline: none; 
+            opacity: 1;
+            transition: opacity .2s;
+          }
+
+          .sliderLabel1 {
+            color: black;
+            font-family: monospace;
+            font-style: none;
+            font-weight: none;
+            font-size: 9pt;
+            text-align: left;
+            text-decoration: none;
+            padding-left: 5px;
+            padding-top: 0;
+            width: 100%;
+            display: inline-block;
+    
+            margin-top: 5px;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            border-radius: 0px;
+          }
+
+          .sliderLabel2 {
+            color: black;
+            font-family: monospace;
+            font-style: none;
+            font-weight: none;
+            font-size: 9pt;
+            text-align: left;
+            text-decoration: none;
+            padding-left: 5px;
+            padding-top: 0;
+            width: 100%;
+            display: inline-block;
+    
+            margin-top: 5px;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            border-radius: 0px;
+          }
+
+          .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 10px; 
+            height: 10px; 
+            background: white; 
+            cursor: pointer; 
+          }
+
+          .slider:hover{
+            background: black;
+          } 
+
+          @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+          }
+        </style>
+  
+    </head>
+    <body>
+      <!-- <header>SOLAR CANOPY</header> -->
+        <div id="loader"></div> 
+        <div id="container">
+          <div id="overlay1">
+            <div class = "header1">· SOLAR CANOPY ·</div>
+            <div class = "header2">
+              solar canopy is an experimental shading device configurator that allows you to populate infinite structures of revolution with solar panels; defining its quantity, size and vertical angle.
+            </div>
+            <div class = "header2">
+              enjoy playing with the different sliders to create your unique design!
+            </div>
+          </div>
+
+          <div id="overlay2">  <!-- SLIDERS STRUCTURE -->
+            <div class = "header2">· Sliders to control the geometry ·</div>
+            <div>
+                <label class = "sliderLabel1" for="segments">Section Segments</label>
+                <input class = "slider" type="range" id="segments" name="segments" min="3" max="15" value="8" step="1">
+            </div>
+
+            <div>
+                <label class = "sliderLabel1" for="radius1">Size Bottom</label>
+                <input class = "slider" type="range" id="radius1" name="radius1" min="10" max="80" value="30" step="10">
+            </div>
+
+            <div>
+                <label class = "sliderLabel1" for="radius2">Size Middle</label>
+                <input class = "slider" type="range" id="radius2" name="radius2" min="10" max="80" value="30" step="10">
+            </div> 
+
+            <div>
+                <label class = "sliderLabel1" for="radius3">Size Top</label>
+                <input class = "slider" type="range" id="radius3" name="radius3" min="10" max="80" value="10" step="10">
+            </div>
+          </div>
+
+          <div id="overlay3">  <!-- SLIDERS PANELS -->
+            <div class = "header2">· Sliders to control the panels ·</div>
+            <!-- PANELS TYPE A -->
+            <div>
+                <label class = "sliderLabel1" for="panelAscale">Panels A_Scale</label>
+                <input class = "slider" type="range" id="panelAscale" name="panelAscale" min="0.0" max="4.0" value="2.5" step="0.1">
+            </div>
+
+            <div>
+                <label class = "sliderLabel2" for="panelAangle">Panels A_Angle</label>
+                <input class = "slider" type="range" id="panelAangle" name="panelAangle" min="-90" max="90" value="0" step="5">
+            </div>
+
+            <!-- PANELS TYPE B -->
+            <div>
+              <label class = "sliderLabel1" for="panelBscale">Panels B_Scale</label>
+              <input class = "slider" type="range" id="panelBscale" name="panelBscale" min="0.0" max="4.0" value="1.5" step="0.1">
+            </div>
+
+            <div>
+              <label class = "sliderLabel2" for="panelBangle">Panels B_Angle</label>
+              <input class = "slider" type="range" id="panelBangle" name="panelBangle" min="-90" max="90" value="0" step="5">
+            </div>
+
+            <!-- PANELS TYPE C -->
+            <div>
+              <label class = "sliderLabel1" for="panelCscale">Panels C_Scale</label>
+              <input class = "slider" type="range" id="panelCscale" name="panelCscale" min="0.0" max="4.0" value="1.5" step="0.1">
+            </div>
+
+            <div>
+              <label class = "sliderLabel2" for="panelCangle">Panels C_Angle</label>
+              <input class = "slider" type="range" id="panelCangle" name="panelCangle" min="-90" max="90" value="0" step="5">
+            </div>
+          
+            <!-- PANELS TYPE D -->
+            <div>
+              <label class = "sliderLabel1" for="panelDscale">Panels D_Scale</label>
+              <input class = "slider" type="range" id="panelDscale" name="panelDscale" min="0.0" max="4.0" value="2.5" step="0.1">
+            </div>
+
+          <div>
+              <label class = "sliderLabel2" for="panelDangle">Panels D_Angle</label>
+              <input class = "slider" type="range" id="panelDangle" name="panelDangle" min="-90" max="90" value="0" step="5">
+          </div>          
+
+          <!-- PANELS REDUCTION - PERCENTAGE -->
+          <div>
+            <label class = "sliderLabel2" for="reduction">Panels Reduction</label>
+            <input class = "slider" type="range" id="reduction" name="reduction" min="0.0" max="1.0" value="0.0" step="0.1">
+          </div> 
+
+          </div>
+
+          <div id="overlay4">  <!-- RESULTS -->
+            <div class = "header2">· Results ·</div>
+            <div>
+              <results>
+                <div id="panelsA"> Area of Panels Type A </div>
+                <div id="panelsB" > Area of Panels Type B </div>
+                <div id="panelsC"> Area of Panels Type C </div>
+                <div id="panelsD"> Area of Panels Type D </div>
+                <div id="panelsTotal" > Total Area of Panels </div>
+               </results>
+            </div>
+          </div>
+
+          <div id="overlay5">   <!-- BUTTONS -->
+            <div>
+              <button class = "button" id="downloadButton" disabled>rhino</button>
+              <button class = "button" href="canopy.gh" download="canopy.gh.html">html</button>
+            </div>
+          </div>
+
+          <div id="overlay6">  <!-- ID -->
+            <div class = "header3">
+              developed by Lucía Leva
+            </div>
+            <div class = "header3">
+              IaaC MaCAD 2022
+            </div>
+          </div>
+        </div>
+
+        <script type="module" src="./script.js"></script>
+
+    </body>
+</html>
