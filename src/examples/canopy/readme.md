@@ -1,6 +1,3 @@
-![GitHub package.json version](https://img.shields.io/github/package-json/v/mcneel/compute.rhino3d.appserver/main?label=version&style=flat-square)
-![node-current (scoped)](https://img.shields.io/badge/dynamic/json?label=node&query=engines.node&url=https%3A%2F%2Fraw.githubusercontent.com%2Fmcneel%2Fcompute.rhino3d.appserver%2Fmain%2Fpackage.json&style=flat-square&color=dark-green)
-
 # SOLAR CANOPY
 This app is an experimental shading device configurator that allows to populate infinite structures of revolution with PV panels; defining its quantity, size and vertical angle.
 Enjoy playing with the different sliders to create myriad of iterations and download them as Rhino files (.3dm).
