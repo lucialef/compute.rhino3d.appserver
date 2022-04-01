@@ -11,7 +11,7 @@ loader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/' )
 const data = {
   definition: 'canopy.gh',
   inputs: getInputs()
-}
+} 
 
 // globals
 let rhino, doc
@@ -23,7 +23,7 @@ rhino3dm().then(async m => {
     compute()
 })
 
-const downloadButton = document.getElementById("rhinoButton")
+const downloadButton = document.getElementById("downloadButton")
 downloadButton.onclick = download
 
   /////////////////////////////////////////////////////////////////////////////
@@ -72,7 +72,7 @@ function init() {
     // create a scene and a camera
     scene = new THREE.Scene()
     scene.background = new THREE.Color('lightblue')
-    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500)
+    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 200)
     camera.position.set(1, -1, 1) // like perspective view
 
     // very light grey for background, like rhino
@@ -193,11 +193,11 @@ function collectResults(responseJson) {
     }
 
       //GET VALUES
-      document.getElementById('panelsA').innerText = "Site Area = " + panelsA + " m2"
-      document.getElementById('panelsB').innerText = "Total Building Area = " + panelsB + " m2"
-      document.getElementById('panelsC').innerText = "Site Perimeter = " + panelsC + " m2"
-      document.getElementById('panelsD').innerText = "Total Building Perimeter = " + panelsD + " m2"
-      document.getElementById('panelsTotal').innerText = "Total Building Volume = " + panelsTotal + " m2"
+      document.getElementById('panelsA').innerText = "Area of Panels Type A = " + panelsA + " m2"
+      document.getElementById('panelsB').innerText = "Area of Panels Type B = " + panelsB + " m2"
+      document.getElementById('panelsC').innerText = "Area of Panels Type C = " + panelsC + " m2"
+      document.getElementById('panelsD').innerText = "Area of Panels Type D = " + panelsD + " m2"
+      document.getElementById('panelsTotal').innerText = "Total Area of Panels = " + panelsTotal + " m2"
 
     if (doc.objects().count < 1) {
       console.error('No rhino objects to load!')
@@ -220,7 +220,7 @@ function collectResults(responseJson) {
             //console.log(child.userData.attributes.geometry.userStrings[0][1])
             const col = child.userData.attributes.geometry.userStrings[0][1]
             const threeColor = new THREE.Color( "rgb(" + col + ")")
-            const mat = new THREE.MeshPhysicalMaterial( {color: threeColor, transparent: true, opacity: 0.8})
+            const mat = new THREE.MeshPhysicalMaterial( {color: threeColor, transparent: true, opacity: 0.7})
             child.material = mat 
           }
         }
@@ -238,6 +238,7 @@ function collectResults(responseJson) {
           }
         }
       })      
+  
 
       // clear objects from scene. do this here to avoid blink
         scene.traverse(child => {
