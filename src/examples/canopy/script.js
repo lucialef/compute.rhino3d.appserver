@@ -226,6 +226,18 @@ function collectResults(responseJson) {
         }
       })
 
+      // color crvs
+        object.traverse(child => {
+        if (child.isLine) {
+          if (child.userData.attributes.geometry.userStringCount > 0) {
+            //console.log(child.userData.attributes.geometry.userStrings[0][1])
+            const col = child.userData.attributes.geometry.userStrings[0][1]
+            const threeColor = new THREE.Color( "rgb(" + col + ")")
+            const mat = new THREE.LineBasicMaterial({color:threeColor})
+            child.material = mat            
+          }
+        }
+      })      
 
       // clear objects from scene. do this here to avoid blink
         scene.traverse(child => {
@@ -233,19 +245,6 @@ function collectResults(responseJson) {
               scene.remove(child)
           }
       })
-
-      // color crvs
-          object.traverse(child => {
-          if (child.isLine) {
-          if (child.userData.attributes.geometry.userStringCount > 0) {
-          //console.log(child.userData.attributes.geometry.userStrings[0][1])
-          const col = child.userData.attributes.geometry.userStrings[0][1]
-          const threeColor = new THREE.Color( "rgb(" + col + ")")
-          const mat = new THREE.LineBasicMaterial({color:threeColor})
-          child.material = mat            
-        }
-      }
-    })
 
         // add object graph from rhino model to three.js scene
         scene.add( object )
