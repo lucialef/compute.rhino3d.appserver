@@ -6,8 +6,8 @@ Enjoy playing with the different sliders to create myriad of iterations and down
 Only native Grasshopper components
 
 ## Source
-The app can be accessed here_ link:https://bimsc22-
-The site is published using the following Githubpage_ link:https://github.com/lucialef/compute.rhino3d.appserver/edit/main/src/examples/canopy/
+The app can be accessed here_ link:https://bimsc22-appcanopy.herokuapp.com/examples/solarcanopy/
+The site is published using the following Githubpage_ link:https://github.com/lucialef/compute.rhino3d.appserver/edit/main/src/examples/solarcanopy/
 
 ## Credits
-SOLAR CANOPY App is a project of IAAC, Institute of Advanced Architecture of Catalonia developed at MaCAD, Master In Advanced Computation For Architecture & Design in 2021/2022 by Student: Lucía Leva Fuentes, and Faculty: David Andres León & Hesham Shawqy.
+SOLAR CANOPY APP is a project of IAAC, Institute of Advanced Architecture of Catalonia developed at MaCAD, Master In Advanced Computation For Architecture & Design in 2021/2022 by Student: Lucía Leva Fuentes, and Faculty: David Andres León & Hesham Shawqy.
