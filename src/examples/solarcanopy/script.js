@@ -9,7 +9,7 @@ loader.setLibraryPath( 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/' )
 
 // initialise 'data' object that will be used by compute()
 const data = {
-  definition: 'canopy.gh',
+  definition: 'solarcanopy.gh',
   inputs: getInputs()
 } 
 
@@ -25,6 +25,10 @@ rhino3dm().then(async m => {
 
 const downloadButton = document.getElementById("downloadButton")
 downloadButton.onclick = download
+/* 
+const downloadButton = document.getElementById("htmlButton")
+downloadButton.onclick = download 
+*/
 
   /////////////////////////////////////////////////////////////////////////////
  //                            HELPER  FUNCTIONS                            //
@@ -59,7 +63,7 @@ function getInputs() {
 }
 
 // more globals
-let scene, camera, renderer, controls, panelsA, panelsB, panelsC, panelsD, panelsTotal
+let scene, camera, renderer, controls, PAnum, PAarea, PAangle, PBnum, PBarea, PBangle, PCnum, PCarea, PCangle, PDnum, PDarea, PDangle, PTnum, PTarea
 
 /**
  * Sets up the scene, camera, renderer, lights and controls and starts the animation
@@ -71,9 +75,9 @@ function init() {
 
     // create a scene and a camera
     scene = new THREE.Scene()
-    scene.background = new THREE.Color('lightblue')
-    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 200)
-    camera.position.set(1, -1, 1) // like perspective view
+    scene.background = new THREE.Color('blue')
+    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000)
+    camera.position.set(1, -1, 1.5) // like perspective view
 
     // very light grey for background, like rhino
     scene.background = new THREE.Color('blue')
@@ -154,37 +158,95 @@ function collectResults(responseJson) {
           // ...load rhino geometry into doc
           const rhinoObject = decodeItem(branch[j])
 
-           //GET VALUES
-           if (values[i].ParamName == "RH_OUT:panelsA") {
-            //panelsA = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-            panelsA = Math.round(branch[j].data)
-            console.log(panelsA)
+           //GET VALUES PANELS A
+           if (values[i].ParamName == "RH_OUT:PAnum") {
+            //PAnum = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            PAnum = Math.round(branch[j].data)
+            console.log(PAnum)
           }
 
-          if (values[i].ParamName == "RH_OUT:panelsB") {
-            //panelsB = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-            panelsB = Math.round(branch[j].data)
-            console.log(panelsB)
+          if (values[i].ParamName == "RH_OUT:PAarea") {
+            //PAarea = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            PAarea = Math.round(branch[j].data)
+            console.log(PAarea)
           }
 
-          if (values[i].ParamName == "RH_OUT:panelsC") {
-            //panelsC = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-            panelsC = Math.round(branch[j].data)
-            console.log(panelsC)
+          if (values[i].ParamName == "RH_OUT:PAangle") {
+            //PAangle = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            PAangle = Math.round(branch[j].data)
+            console.log(PAangle)
           }
 
-          if (values[i].ParamName == "RH_OUT:panelsD") {
-            //panelsD = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-            panelsD = Math.round(branch[j].data)
-            console.log(panelsD)
+           //GET VALUES PANELS B
+           if (values[i].ParamName == "RH_OUT:PBnum") {
+            //PBnum = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            PBnum = Math.round(branch[j].data)
+            console.log(PBnum)
+          }
+
+          if (values[i].ParamName == "RH_OUT:PBarea") {
+            //PBarea = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            PBarea = Math.round(branch[j].data)
+            console.log(PBarea)
+          }
+
+          if (values[i].ParamName == "RH_OUT:PBangle") {
+            //PBangle = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            PBangle = Math.round(branch[j].data)
+            console.log(PBangle)
           }
           
-          if (values[i].ParamName == "RH_OUT:panelsTotal") {
-            //panelsTotal = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-            panelsTotal = Math.round(branch[j].data)
-            console.log(panelsTotal)
+           //GET VALUES PANELS C
+           if (values[i].ParamName == "RH_OUT:PCnum") {
+            //PCnum = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            PCnum = Math.round(branch[j].data)
+            console.log(PCnum)
+          }
+
+          if (values[i].ParamName == "RH_OUT:PCarea") {
+            //PCarea = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            PCarea = Math.round(branch[j].data)
+            console.log(PCarea)
+          }
+
+          if (values[i].ParamName == "RH_OUT:PCangle") {
+            //PCangle = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            PCangle = Math.round(branch[j].data)
+            console.log(PCangle)
+          }
+
+           //GET VALUES PANELS D
+           if (values[i].ParamName == "RH_OUT:PDnum") {
+            //PDnum = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            PDnum = Math.round(branch[j].data)
+            console.log(PDnum)
+          }
+
+          if (values[i].ParamName == "RH_OUT:PDarea") {
+            //PDarea = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            PDarea = Math.round(branch[j].data)
+            console.log(PDarea)
+          }
+
+          if (values[i].ParamName == "RH_OUT:PDangle") {
+            //PDangle = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            PDangle = Math.round(branch[j].data)
+            console.log(PDangle)
+          }
+
+           //GET VALUES PANELS TOTAL
+          if (values[i].ParamName == "RH_OUT:PTnum") {
+            //PTnum = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            PTnum = Math.round(branch[j].data)
+            console.log(PTnum)
           }
           
+          if (values[i].ParamName == "RH_OUT:PTarea") {
+            //PTarea = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            PTarea = Math.round(branch[j].data)
+            console.log(PTarea)
+          }
+
           if (rhinoObject !== null) {
             doc.objects().add(rhinoObject, null)
           }
@@ -193,11 +255,24 @@ function collectResults(responseJson) {
     }
 
       //GET VALUES
-      document.getElementById('panelsA').innerText = "Area of Panels Type A = " + panelsA + " m2"
-      document.getElementById('panelsB').innerText = "Area of Panels Type B = " + panelsB + " m2"
-      document.getElementById('panelsC').innerText = "Area of Panels Type C = " + panelsC + " m2"
-      document.getElementById('panelsD').innerText = "Area of Panels Type D = " + panelsD + " m2"
-      document.getElementById('panelsTotal').innerText = "Total Area of Panels = " + panelsTotal + " m2"
+      document.getElementById('PAnum').innerText = "Number = " + PAnum + " units"
+      document.getElementById('PAarea').innerText = "Area = " + PAarea + " m2"
+      document.getElementById('PAangle').innerText = "Angle = " + PAangle + " º"
+
+      document.getElementById('PBnum').innerText = "Number = " + PBnum + " units"
+      document.getElementById('PBarea').innerText = "Area = " + PBarea + " m2"
+      document.getElementById('PBangle').innerText = "Angle = " + PBangle + " º"
+
+      document.getElementById('PCnum').innerText = "Number = " + PCnum + " units"
+      document.getElementById('PCarea').innerText = "Area = " + PCarea + " m2"
+      document.getElementById('PCangle').innerText = "Angle = " + PCangle + " º"
+
+      document.getElementById('PDnum').innerText = "Number = " + PDnum + " units"
+      document.getElementById('PDarea').innerText = "Area = " + PDarea + " m2"
+      document.getElementById('PDangle').innerText = "Angle = " + PDangle + " º"
+
+      document.getElementById('PTnum').innerText = "Total Number of Panels = " + PTnum + " units"
+      document.getElementById('PTarea').innerText = "Total Area of Panels = " + PTarea + " m2"
 
     if (doc.objects().count < 1) {
       console.error('No rhino objects to load!')
@@ -214,6 +289,14 @@ function collectResults(responseJson) {
     { 
 
       // color Mesh
+        object.traverse(function (child) {
+        if (child.isMesh) {
+            const material = new THREE.MeshNormalMaterial({ flatShading: true, transparent: true, opacity: 0.7})
+            child.material = material
+          }
+        })
+
+        /*
         object.traverse(child => {
         if (child.isMesh) {
           if (child.userData.attributes.geometry.userStringCount > 0) {
@@ -222,9 +305,9 @@ function collectResults(responseJson) {
             const threeColor = new THREE.Color( "rgb(" + col + ")")
             const mat = new THREE.MeshPhysicalMaterial( {color: threeColor, transparent: true, opacity: 0.7})
             child.material = mat 
-          }
-        }
-      })
+          } 
+        } 
+      }) */
 
       // color crvs
         object.traverse(child => {

@@ -16,13 +16,11 @@
             font-size: 9pt;
           }
           
-          #container {
+          #container_l {
             position: absolute;
-            /* background-color:yellow; */
             z-index: 1;
             width: 300px;
             height: relative;
-            /* border: 2px dotted rgb(255, 255, 255, 0.3); */
             padding-left: 10px;
             padding-right: 25px;
             padding-top: 10px;
@@ -30,7 +28,21 @@
             float: left;
           }
 
-          #overlay1 { 
+          #container_r {
+            position: absolute;
+            /* background-color:rgb(255, 255, 255, 0.65); */
+            z-index: 1;
+            width: 250px;
+            height: relative;
+            right: 5px;
+            padding-left: 10px;
+            padding-right: 25px;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            float: right;
+          }
+
+          #ov_title { 
             position: relative;
             background-color:rgb(255, 255, 255, 0.65);
             /* border: 2px dotted rgb(255, 255, 255, 0.3); */
@@ -45,7 +57,7 @@
             padding-bottom: 5px;
           }
 
-          #overlay2 { 
+          #ov_shape { 
             position: relative;
             background-color:rgb(255, 255, 255, 0.65);
             z-index: 1;
@@ -59,7 +71,7 @@
             padding-bottom: 5px;
           }
 
-          #overlay3 { 
+          #ov_panels { 
             position: relative;
             background-color:rgb(255, 255, 255, 0.65);
             z-index: 1;
@@ -73,11 +85,11 @@
             padding-bottom: 5px;
           }
 
-          #overlay4 { 
+          #ov_results { 
             position: relative;
             background-color:rgb(255, 255, 255, 0.65);
             z-index: 1;
-            top: 15pt; 
+            top: 0pt; 
             left: 0pt;
             bottom: 5pt;
             width: 100%;
@@ -87,7 +99,7 @@
             padding-bottom: 5px;
           }
 
-          #overlay5 { 
+          #ov_buttons { 
             position: relative;
             /* background-color:tomato; */
             z-index: 1;
@@ -101,7 +113,7 @@
             padding-bottom: 5px;
           }
 
-          #overlay6 { 
+          #ov_id { 
             position: relative;
             z-index: 1;
             top: 25pt; 
@@ -168,6 +180,33 @@
             text-align: left;
             padding-left: 0px;
             padding-right: 0px;
+            letter-spacing: 1px;
+          }
+
+          .header4 {
+            width: 100%;
+            color: rgb(0, 0, 0);
+            font-family: monospace;
+            font-style: none;
+            font-weight: bold;
+            font-size: 9pt;
+            text-align: left;
+            padding-top: 10px;
+            padding-left: 5px;
+            padding-right: 0px;
+            padding-bottom: 5px;
+            letter-spacing: 1px;
+          }
+
+          .header5 {
+            width: 100%;
+            color: rgb(0, 0, 0);
+            font-size: 9pt;
+            text-align: left;
+            padding-top: 5px;
+            padding-left: 20px;
+            padding-right: 0px;
+            padding-bottom: 5px;
             letter-spacing: 1px;
           }
 
@@ -260,8 +299,8 @@
     <body>
       <!-- <header>SOLAR CANOPY</header> -->
         <div id="loader"></div> 
-        <div id="container">
-          <div id="overlay1">
+        <div id="container_l">
+          <div id="ov_title">
             <div class = "header1">· SOLAR CANOPY ·</div>
             <div class = "header2">
               solar canopy is an experimental shading device configurator that allows you to populate infinite structures of revolution with solar panels; defining its quantity, size and vertical angle.
@@ -271,7 +310,7 @@
             </div>
           </div>
 
-          <div id="overlay2">  <!-- SLIDERS STRUCTURE -->
+          <div id="ov_shape">  <!-- SLIDERS STRUCTURE -->
             <div class = "header2">· Sliders to control the geometry ·</div>
             <div>
                 <label class = "sliderLabel1" for="segments">Section Segments</label>
@@ -292,14 +331,24 @@
                 <label class = "sliderLabel1" for="radius3">Size Top</label>
                 <input class = "slider" type="range" id="radius3" name="radius3" min="10" max="80" value="10" step="10">
             </div>
+            
+            <div>
+              <label class = "sliderLabel1" for="disp1">Height Middle</label>
+              <input class = "slider" type="range" id="disp1" name="disp1" min="5" max="60" value="20" step="5">
+            </div>
+            
+            <div>
+              <label class = "sliderLabel1" for="disp2">Height Top</label>
+              <input class = "slider" type="range" id="disp2" name="disp2" min="5" max="60" value="50" step="5">
+            </div>
           </div>
 
-          <div id="overlay3">  <!-- SLIDERS PANELS -->
+          <div id="ov_panels">  <!-- SLIDERS PANELS -->
             <div class = "header2">· Sliders to control the panels ·</div>
             <!-- PANELS TYPE A -->
             <div>
                 <label class = "sliderLabel1" for="panelAscale">Panels A_Scale</label>
-                <input class = "slider" type="range" id="panelAscale" name="panelAscale" min="0.0" max="4.0" value="2.5" step="0.1">
+                <input class = "slider" type="range" id="panelAscale" name="panelAscale" min="0.0" max="4.0" value="1.5" step="0.1">
             </div>
 
             <div>
@@ -348,27 +397,15 @@
 
           </div>
 
-          <div id="overlay4">  <!-- RESULTS -->
-            <div class = "header2">· Results ·</div>
-            <div>
-              <results>
-                <div id="panelsA"> Area of Panels Type A </div>
-                <div id="panelsB" > Area of Panels Type B </div>
-                <div id="panelsC"> Area of Panels Type C </div>
-                <div id="panelsD"> Area of Panels Type D </div>
-                <div id="panelsTotal" > Total Area of Panels </div>
-               </results>
-            </div>
-          </div>
-
-          <div id="overlay5">   <!-- BUTTONS -->
+          <div id="ov_buttons">   <!-- BUTTONS -->
             <div>
               <button class = "button" id="downloadButton" disabled>rhino</button>
-              <button class = "button" href="canopy.gh" download="canopy.gh.html">html</button>
+              <!-- <button class = "button" id="htmlButton" disabled>html</button>  -->
+              <button class = "button" href="solarcanopy.gh" download="solarcanopy.gh.html">html</button>
             </div>
           </div>
 
-          <div id="overlay6">  <!-- ID -->
+          <div id="ov_id">  <!-- ID -->
             <div class = "header3">
               developed by_ Lucía Leva
             </div>
@@ -379,6 +416,55 @@
               IaaC MaCAD 2022
             </div>
           </div>
+        </div>
+
+        <div id="container_r">
+          <div id="ov_results">  <!-- RESULTS -->
+            <div class = "header2">· Results ·</div>
+            <div class = "header4"> Panels Type A </div>
+            <div class = "header5"> 
+               <results>
+                <div id="PAnum"> Number </div>
+                <div id="PAarea" > Area </div>
+                <div id="PAangle"> Angle </div>
+               </results>
+            </div>
+            <div class = "header4"> Panels Type B </div>
+            <div class = "header5"> 
+               <results>
+                <div id="PBnum" > Number </div>
+                <div id="PBarea" > Area </div>
+                <div id="PBangle" > Angle </div>
+               </results>
+            </div>
+            <div class = "header4"> Panels Type C </div>
+            <div class = "header5"> 
+               <results>
+                <div id="PCnum" > Number </div>
+                <div id="PCarea" > Area </div>
+                <div id="PCangle" > Angle </div>
+               </results>
+            </div>
+            <div class = "header4"> Panels Type D </div>
+            <div class = "header5"> 
+               <results>
+                <div id="PDnum" > Number </div>
+                <div id="PDarea" > Area </div>
+                <div id="PDangle" > Angle </div>
+               </results>
+            </div>
+            <div class = "header4"> 
+               <results>
+                <div id="PTnum" > Total Number of Panels </div>
+               </results>
+            </div>
+            <div class = "header4"> 
+               <results>
+                <div id="PTarea" > Total Area of Panels </div>
+               </results>
+            </div>
+          </div>
+
         </div>
 
         <script type="module" src="./script.js"></script>
